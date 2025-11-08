@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>I'm sorry, Priyanka</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Theme Selector -->
+  <div id="themeSelector" class="theme-selector">
+    <div class="theme-group">
+      <label>Character:</label>
+      <button id="themeCharCat" class="theme-btn active" data-character="cat" title="Cute Cat 🐱">🐱 Cat</button>
+      <button id="themeCharDog" class="theme-btn" data-character="dog" title="Cute Dog 🐕">🐕 Dog</button>
+    </div>
+    <div class="theme-group">
+      <label>Theme:</label>
+      <button id="themeDark" class="theme-btn active" data-theme="dark" title="Dark Theme">🌙 Dark</button>
+      <button id="themePink" class="theme-btn" data-theme="pink" title="Pink Theme">🌸 Pink</button>
+      <button id="themePurple" class="theme-btn" data-theme="purple" title="Purple Theme">💜 Purple</button>
+      <button id="themeGreen" class="theme-btn" data-theme="green" title="Green Theme">🌿 Green</button>
+    </div>
+    <div class="theme-group">
+      <label>Flowers:</label>
+      <button id="flowerRose" class="theme-btn active" data-flower="rose" title="Roses">🌹 Rose</button>
+      <button id="flowerTulip" class="theme-btn" data-flower="tulip" title="Tulips">🌷 Tulip</button>
+      <button id="flowerSunflower" class="theme-btn" data-flower="sunflower" title="Sunflowers">🌻 Sunflower</button>
+      <button id="flowerMixed" class="theme-btn" data-flower="mixed" title="Mixed Flowers">💐 Mixed</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h1 class="message">I’m really sorry, Priyanka <span class="broken">💔</span><br/><small>Please forgive me <span class="bloom">💐</span></small></h1>
+
+      <button id="sorryBtn" class="sorry-btn">SORRY</button>
+
+      <!-- Animated robot character (kotti) -->
+      <div id="robotContainer" class="robot-container">
+        <div class="robot-name-label">🤖 kotti</div>
+        <svg id="robotSVG" class="robot animated" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+          <!-- Robot body (kotti) -->
+          <defs>
+            <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#e0e0e0" />
+              <stop offset="100%" stop-color="#b0b0b0" />
+            </linearGradient>
+          </defs>
+          <!-- Head -->
+          <rect id="robotHead" class="head" x="40" y="20" width="40" height="40" rx="4" fill="url(#metalGrad)" stroke="#888" stroke-width="2"/>
+          <!-- Eyes -->
+          <circle class="eye" cx="50" cy="32" r="3" fill="#00ff00"/>
+          <circle class="eye" cx="65" cy="32" r="3" fill="#00ff00"/>
+          <!-- Body -->
+          <rect class="body" x="35" y="65" width="50" height="50" rx="4" fill="url(#metalGrad)" stroke="#888" stroke-width="2"/>
+          <!-- Left arm -->
+          <g class="arm-left" transform-origin="45 75">
+            <rect x="15" y="75" width="30" height="12" rx="6" fill="url(#metalGrad)" stroke="#888" stroke-width="1.5"/>
+            <circle cx="20" cy="81" r="6" fill="#e0e0e0" stroke="#888" stroke-width="1"/>
+          </g>
+          <!-- Right arm (will hold and give rose) -->
+          <g id="robotArmRight" class="arm-right" transform-origin="75 75">
+            <rect x="75" y="75" width="30" height="12" rx="6" fill="url(#metalGrad)" stroke="#888" stroke-width="1.5"/>
+            <circle cx="100" cy="81" r="6" fill="#e0e0e0" stroke="#888" stroke-width="1"/>
+          </g>
+          <!-- Legs -->
+          <rect class="leg-left" x="45" y="120" width="10" height="35" rx="4" fill="#666" stroke="#333" stroke-width="1"/>
+          <rect class="leg-right" x="65" y="120" width="10" height="35" rx="4" fill="#666" stroke="#333" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <!-- Beautiful Animated White Cat -->
+      <div id="catContainer" class="cat-container">
+        <svg id="catSVG" class="cat-animated" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cute white cat with opening mouth -->
+          <defs>
+            <linearGradient id="catFur" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="100%" stop-color="#f0f0f0" />
+            </linearGradient>
+            <filter id="catShadow">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.2"/>
+            </filter>
+          </defs>
+          <!-- Body -->
+          <ellipse class="cat-body" cx="100" cy="140" rx="45" ry="55" fill="url(#catFur)" stroke="#e0e0e0" stroke-width="1.5" filter="url(#catShadow)"/>
+          <!-- Head -->
+          <circle class="cat-head" cx="100" cy="80" r="40" fill="url(#catFur)" stroke="#e0e0e0" stroke-width="1.5"/>
+          <!-- Ears -->
+          <g class="cat-ears">
+            <polygon class="ear-left" points="70,35 60,10 80,30" fill="url(#catFur)" stroke="#e0e0e0" stroke-width="1.5"/>
+            <polygon class="ear-right" points="130,35 140,10 120,30" fill="url(#catFur)" stroke="#e0e0e0" stroke-width="1.5"/>
+            <!-- Inner ear pink -->
+            <polygon points="72,32 68,18 78,28" fill="#ffb3d9" opacity="0.7"/>
+            <polygon points="128,32 132,18 122,28" fill="#ffb3d9" opacity="0.7"/>
+          </g>
+          <!-- Eyes -->
+          <g class="cat-eyes">
+            <ellipse class="eye-left" cx="85" cy="75" rx="6" ry="9" fill="#333"/>
+            <ellipse class="eye-right" cx="115" cy="75" rx="6" ry="9" fill="#333"/>
+            <circle cx="86" cy="73" r="2.5" fill="#fff"/>
+            <circle cx="116" cy="73" r="2.5" fill="#fff"/>
+          </g>
+          <!-- Nose -->
+          <polygon class="cat-nose" points="100,90 96,98 104,98" fill="#ffb3d9"/>
+          <!-- Mouth (opens and closes) -->
+          <g class="cat-mouth">
+            <path class="mouth-line" d="M 100 98 Q 95 102 90 100" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path class="mouth-line" d="M 100 98 Q 105 102 110 100" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <ellipse id="mouthOpen" class="mouth-open" cx="100" cy="105" rx="8" ry="6" fill="#ffb3d9" opacity="0"/>
+          </g>
+          <!-- Whiskers -->
+          <g class="cat-whiskers" stroke="#666" stroke-width="1" stroke-linecap="round">
+            <line x1="60" y1="80" x2="40" y2="78"/>
+            <line x1="60" y1="88" x2="40" y2="90"/>
+            <line x1="140" y1="80" x2="160" y2="78"/>
+            <line x1="140" y1="88" x2="160" y2="90"/>
+          </g>
+          <!-- Tail (wagging) -->
+          <path class="cat-tail" d="M 140 160 Q 160 150 165 120" stroke="url(#catFur)" stroke-width="12" fill="none" stroke-linecap="round" stroke="#e0e0e0"/>
+          <!-- Front paws -->
+          <g class="cat-paws">
+            <ellipse cx="80" cy="190" rx="8" ry="14" fill="url(#catFur)" stroke="#e0e0e0" stroke-width="1"/>
+            <ellipse cx="120" cy="190" rx="8" ry="14" fill="url(#catFur)" stroke="#e0e0e0" stroke-width="1"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Beautiful Animated Cute Dog -->
+      <div id="dogContainer" class="dog-container hidden">
+        <svg id="dogSVG" class="dog-animated" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cute brown/tan dog -->
+          <defs>
+            <linearGradient id="dogFur" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#d4a574" />
+              <stop offset="100%" stop-color="#b8956a" />
+            </linearGradient>
+            <filter id="dogShadow">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.2"/>
+            </filter>
+          </defs>
+          <!-- Body -->
+          <ellipse class="dog-body" cx="100" cy="140" rx="48" ry="58" fill="url(#dogFur)" stroke="#a0826d" stroke-width="1.5" filter="url(#dogShadow)"/>
+          <!-- Head -->
+          <circle class="dog-head" cx="100" cy="80" r="42" fill="url(#dogFur)" stroke="#a0826d" stroke-width="1.5"/>
+          <!-- Ears (droopy) -->
+          <g class="dog-ears">
+            <ellipse class="ear-left" cx="65" cy="55" rx="16" ry="28" fill="url(#dogFur)" stroke="#a0826d" stroke-width="1.5"/>
+            <ellipse class="ear-right" cx="135" cy="55" rx="16" ry="28" fill="url(#dogFur)" stroke="#a0826d" stroke-width="1.5"/>
+            <!-- Inner ear darker -->
+            <ellipse cx="65" cy="60" rx="9" ry="18" fill="#9d7961" opacity="0.6"/>
+            <ellipse cx="135" cy="60" rx="9" ry="18" fill="#9d7961" opacity="0.6"/>
+          </g>
+          <!-- Snout -->
+          <ellipse class="dog-snout" cx="100" cy="95" rx="20" ry="18" fill="#c9956f" stroke="#a0826d" stroke-width="1"/>
+          <!-- Eyes -->
+          <g class="dog-eyes">
+            <circle class="eye-left" cx="82" cy="72" r="5" fill="#2d2d2d"/>
+            <circle class="eye-right" cx="118" cy="72" r="5" fill="#2d2d2d"/>
+            <circle cx="83" cy="70" r="2" fill="#fff"/>
+            <circle cx="119" cy="70" r="2" fill="#fff"/>
+          </g>
+          <!-- Nose -->
+          <ellipse class="dog-nose" cx="100" cy="98" rx="7" ry="6" fill="#2d2d2d"/>
+          <!-- Mouth (happy/open) -->
+          <g class="dog-mouth">
+            <path class="mouth-smile" d="M 100 104 Q 95 110 88 108" stroke="#2d2d2d" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path class="mouth-smile" d="M 100 104 Q 105 110 112 108" stroke="#2d2d2d" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle id="dogTongue" class="dog-tongue" cx="100" cy="115" r="4" fill="#ff99cc" opacity="0"/>
+          </g>
+          <!-- Tongue -->
+          <!-- Legs -->
+          <g class="dog-legs">
+            <rect class="leg-left" x="75" y="190" width="12" height="40" rx="6" fill="url(#dogFur)" stroke="#a0826d" stroke-width="1"/>
+            <rect class="leg-right" x="113" y="190" width="12" height="40" rx="6" fill="url(#dogFur)" stroke="#a0826d" stroke-width="1"/>
+          </g>
+          <!-- Tail (wagging more) -->
+          <path class="dog-tail" d="M 145 145 Q 170 140 175 110" stroke="url(#dogFur)" stroke-width="14" fill="none" stroke-linecap="round" stroke="#a0826d"/>
+          <!-- Spots -->
+          <circle cx="75" cy="130" r="8" fill="#9d7961" opacity="0.4"/>
+          <circle cx="125" cy="155" r="6" fill="#9d7961" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <!-- Priyanka Name Animation Container -->
+      <div id="priyankNameContainer" class="priyanka-container hidden">
+        <div class="priyanka-name" id="priyanakaName">Priyanka</div>
+      </div>
+
+      <!-- Gift box button -->
+      <button id="giftBtn" class="gift-btn" title="Click for a gift!">🎁</button>
+
+      <!-- Heart button (gives full name) -->
+      <button id="heartBtn" class="heart-btn" title="Click for love!">💕</button>
+
+      <!-- Full name display (Priyanka Kottilingam) -->
+      <div id="fullNameContainer" class="full-name-container hidden">
+        <div class="full-name-text" id="fullNameText">Priyanka Kottilingam</div>
+      </div>
+
+      <!-- Red rose element that will animate -->
+      <div id="animatedRose" class="animated-rose hidden">🌹</div>
+
+      <div id="animationLayer" aria-hidden="true"></div>
+
+      <div id="lottieContainer" class="lottie hidden" aria-hidden="true">
+        <!-- Lottie animation will be inserted here -->
+        <div class="lottie-inner">
+          <!-- Lightweight inline SVG animation as default. You can replace this with a Lottie animation by
+               uncommenting the script tag below and setting `window.LOTTIE_SRC` (or include via JS). -->
+          <svg class="rose-anim" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Simple looping SVG animation: boy gives rose to girl -->
+            <defs>
+              <linearGradient id="g" x1="0" x2="1">
+                <stop offset="0%" stop-color="#ff9a9e" />
+                <stop offset="100%" stop-color="#fecfef" />
+              </linearGradient>
+            </defs>
+            <g transform="translate(10,10)">
+              <circle cx="40" cy="140" r="20" fill="#ffd7d9" />
+              <rect x="30" y="60" width="20" height="60" fill="#6c5ce7" rx="8" />
+              <circle cx="140" cy="140" r="20" fill="#ffd7d9" />
+              <rect x="130" y="60" width="20" height="60" fill="#ff7675" rx="8" />
+
+              <g class="arm" transform="translate(50,90)">
+                <rect x="0" y="-4" width="50" height="8" fill="#6c5ce7" rx="4" />
+                <g class="rose" transform="translate(50,0)">
+                  <rect x="0" y="-2" width="2" height="30" fill="#2d3436" />
+                  <circle cx="1" cy="-8" r="8" fill="#ff4d6d" />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <!-- User can replace src with a custom mp3. Kept empty to avoid autoplay policies until user clicks. -->
+    <source src="" type="audio/mpeg">
+  </audio>
+
+  <!-- Optional: include lottie-web from CDN. Uncomment to enable Lottie loading. -->
+  <!-- <script src="https://unpkg.com/lottie-web@5.10.1/build/player/lottie.min.js"></script> -->
+
+  <script src="script.js"></script>
+</body>
+</html>

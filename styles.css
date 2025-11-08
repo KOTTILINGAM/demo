@@ -1,0 +1,370 @@
+/* Styles for Sorry Website */
+:root{
+  --bg1: #0a0a0a;
+  --bg2: #1a1a1a;
+  --accent: #ff6b81;
+  --accent2: #6c5ce7;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --card-bg: rgba(30,30,30,0.6);
+  --card-border: rgba(255,255,255,0.1);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Poppins',sans-serif}
+body{
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  transition:all .4s ease;
+}
+
+/* Theme Selector */
+.theme-selector{position:fixed;top:15px;left:15px;background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);z-index:1000;max-height:90vh;overflow-y:auto}
+.theme-group{margin-bottom:12px}
+.theme-group label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.theme-btn{appearance:none;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:var(--text-secondary);padding:6px 12px;border-radius:8px;font-size:12px;cursor:pointer;margin:4px 4px 4px 0;transition:all .2s ease;white-space:nowrap}
+.theme-btn:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.4)}
+.theme-btn.active{background:var(--accent);color:white;border-color:var(--accent)}
+
+/* Theme color variations */
+body.theme-pink{--bg1:#ffd1dc;--bg2:#ffe7f0;--card-bg:rgba(255,255,255,0.35);--card-border:rgba(0,0,0,0.05);--text-primary:#4b2b2b;--text-secondary:#3f2a2a}
+body.theme-purple{--bg1:#d8bfd8;--bg2:#e6d5e6;--card-bg:rgba(255,255,255,0.4);--card-border:rgba(75,0,130,0.1);--text-primary:#2d1b4e;--text-secondary:#4a2f6f}
+body.theme-green{--bg1:#90ee90;--bg2:#98fb98;--card-bg:rgba(255,255,255,0.35);--card-border:rgba(34,139,34,0.1);--text-primary:#1b4d1b;--text-secondary:#2d5a2d}
+
+/* Card always uses current theme variables */
+.container{width:100%;max-width:900px}
+.card{background:var(--card-bg);backdrop-filter:blur(6px);border-radius:20px;padding:40px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.5);border:1px solid var(--card-border);transition:all .4s ease}
+.message{font-family:'Dancing Script', 'Poppins';font-size:36px;margin:0 0 20px;color:var(--text-primary);transition:color .4s ease}
+.message small{display:block;font-size:18px;margin-top:12px;color:var(--text-secondary);transition:color .4s ease}
+.broken{display:inline-block;transform:translateY(2px)}
+.sorry-btn{appearance:none;border:0;padding:18px 36px;border-radius:50px;background:linear-gradient(90deg,var(--accent),#ff9aa2);color:white;font-weight:700;font-size:18px;cursor:pointer;box-shadow:0 6px 18px rgba(255,107,129,0.25);transition:transform .15s ease,box-shadow .15s ease}
+.sorry-btn:active{transform:scale(.98)}
+/* Glowing pulsing */
+.sorry-btn{
+  position:relative;overflow:hidden;
+}
+.sorry-btn::after{
+  content:'';position:absolute;inset:-6px;background:linear-gradient(45deg,rgba(255,255,255,0.08),rgba(255,255,255,0));filter:blur(10px);opacity:0.9;z-index:-1;border-radius:inherit;box-shadow:0 6px 30px rgba(255,107,129,0.25);animation:glow 2.2s infinite;
+}
+@keyframes glow{0%{transform:scale(1);filter:blur(6px)}50%{transform:scale(1.06);filter:blur(18px)}100%{transform:scale(1);filter:blur(6px)}}
+
+/* animation layer for falling hearts & flowers */
+#animationLayer{position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;will-change:top,opacity,transform}
+.particle.heart{font-size:28px;text-shadow:0 2px 6px rgba(0,0,0,0.15)}
+.particle.flower{font-size:26px;text-shadow:0 2px 6px rgba(0,0,0,0.12)}
+
+/* add natural sway and 3D feel */
+.particle{filter:drop-shadow(0 6px 10px rgba(0,0,0,0.06))}
+.particle{animation-name:fall;}
+.particle{transform-origin:center}
+
+/* inner element handles sway/rotation so transforms don't conflict with fall's top animation */
+.p-inner{display:inline-block;will-change:transform;}
+
+@keyframes sway{
+  0%{transform:translateX(0) rotate(0deg)}
+  50%{transform:translateX(14px) rotate(12deg)}
+  100%{transform:translateX(0) rotate(0deg)}
+}
+
+/* animate 'top' property for smoother stacking and less transform conflicts */
+@keyframes fall {
+  0%{top:-12vh;opacity:0}
+  8%{opacity:1}
+  100%{top:110vh;opacity:0.95}
+}
+
+/* Lottie/SVG container */
+.lottie{position:fixed;left:50%;transform:translateX(-50%);bottom:10%;width:320px;height:220px;pointer-events:none}
+.lottie.hidden{display:none}
+.lottie .rose-anim{width:100%;height:100%}
+
+/* Simple animation: arm moves, rose moves toward girl */
+.arm{transform-origin:0 0}
+.arm .rose{transform-origin:0 0}
+.arm{animation:armMove 2.8s ease-in-out infinite}
+@keyframes armMove{
+  0%{transform:translate(50px,90px) rotate(0deg)}
+  30%{transform:translate(40px,85px) rotate(-10deg)}
+  60%{transform:translate(10px,80px) rotate(-35deg)}
+  100%{transform:translate(50px,90px) rotate(0deg)}
+}
+
+/* Rose pulsate */
+.rose{animation:rosePulse 2.8s ease-in-out infinite}
+@keyframes rosePulse{
+  0%{transform:translate(50px,0) scale(1)}
+  60%{transform:translate(5px,-2px) scale(.95)}
+  100%{transform:translate(50px,0) scale(1)}
+}
+
+/* Robot Character Styles */
+.robot-container{margin:30px 0;position:relative;height:200px;display:flex;align-items:center;justify-content:center}
+.robot.animated{width:140px;height:180px}
+.robot .head{will-change:transform}
+.robot .eye{will-change:fill}
+.robot .body{will-change:transform}
+.robot .arm-left{animation:armWave 2s ease-in-out infinite;transform-origin:45px 75px;will-change:transform}
+.robot .arm-right{will-change:transform}
+.robot .leg-left,.robot .leg-right{will-change:transform}
+.robot.giving-rose .arm-right{animation:armGiveRose 1.2s ease-in-out forwards}
+
+@keyframes armWave{
+  0%{transform:rotate(0deg)}
+  50%{transform:rotate(-15deg)}
+  100%{transform:rotate(0deg)}
+}
+
+@keyframes armGiveRose{
+  0%{transform:rotate(0deg) translate(0,0)}
+  50%{transform:rotate(-25deg) translate(-5px,-5px)}
+  100%{transform:rotate(-30deg) translate(-10px,-8px)}
+}
+
+@keyframes roseFloat{
+  0%{left:60px;top:80px;opacity:1;transform:scale(1) rotate(0deg)}
+  50%{left:45%;top:35%;opacity:0.9;transform:scale(1.1) rotate(20deg)}
+  100%{left:50%;top:20%;opacity:0;transform:scale(0.8) rotate(45deg)}
+}
+
+/* Gift Box Button */
+.gift-btn{appearance:none;border:0;background:none;font-size:64px;cursor:pointer;padding:10px;margin-top:20px;transition:transform .2s ease,filter .2s ease;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));animation:giftBounce 1.5s ease-in-out infinite}
+.gift-btn:hover{transform:scale(1.15);filter:drop-shadow(0 6px 14px rgba(255,215,0,0.4))}
+.gift-btn:active{transform:scale(0.95)}
+
+/* Heart Button */
+.heart-btn{appearance:none;border:0;background:none;font-size:64px;cursor:pointer;padding:10px;margin-top:20px;margin-left:15px;transition:transform .2s ease,filter .2s ease;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));animation:heartBeat 1.2s ease-in-out infinite}
+.heart-btn:hover{transform:scale(1.2);filter:drop-shadow(0 6px 14px rgba(255,20,147,0.6))}
+.heart-btn:active{transform:scale(0.9)}
+
+@keyframes heartBeat{
+  0%{transform:scale(1)}
+  25%{transform:scale(1.15)}
+  50%{transform:scale(1)}
+  75%{transform:scale(1.15)}
+  100%{transform:scale(1)}
+}
+
+@keyframes giftBounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+
+/* Full Name Display */
+.full-name-container{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:300;pointer-events:none}
+.full-name-container.hidden{display:none}
+
+.full-name-text{
+  font-size:64px;
+  font-weight:700;
+  font-family:'Dancing Script','Poppins';
+  text-align:center;
+  letter-spacing:3px;
+  animation:fullNameExplode 4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  background:linear-gradient(90deg,#ff1493,#ff69b4,#ffc0cb,#ff1493,#ff69b4);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 40px rgba(255,20,147,0.5);
+  filter:drop-shadow(0 0 20px rgba(255,20,147,0.6));
+  white-space:nowrap;
+}
+
+@keyframes fullNameExplode{
+  0%{transform:scale(0) rotate(-360deg);opacity:0;filter:blur(30px)}
+  30%{transform:scale(1.3) rotate(0deg);opacity:1;filter:blur(0px)}
+  70%{transform:scale(1.2) rotate(0deg);opacity:1}
+  100%{transform:scale(1) rotate(0deg);opacity:0;filter:blur(10px);transform:translateY(-80px)}
+}
+
+/* Animated Rose */
+.animated-rose{position:fixed;font-size:48px;z-index:100;will-change:left,top,opacity,transform;pointer-events:none}
+.animated-rose.hidden{display:none}
+.animated-rose.active{animation:roseFloat 2s ease-in-out forwards}
+
+/* Robot Name Label */
+.robot-container{position:relative}
+.robot-name-label{position:absolute;top:-35px;left:50%;transform:translateX(-50%);font-size:18px;font-weight:700;color:var(--text-primary);background:rgba(0,255,0,0.2);padding:6px 14px;border-radius:20px;border:2px solid #00ff00;white-space:nowrap;animation:robotNamePulse 2s ease-in-out infinite;transition:color .4s ease}
+
+@keyframes robotNamePulse{
+  0%{transform:translateX(-50%) scale(1);opacity:1}
+  50%{transform:translateX(-50%) scale(1.1);opacity:0.9}
+  100%{transform:translateX(-50%) scale(1);opacity:1}
+}
+
+/* Cat Container & Animations */
+.cat-container{margin:25px 0;position:relative;height:280px;display:flex;align-items:center;justify-content:center;transition:opacity .4s ease}
+.cat-container.hidden{display:none}
+.cat-animated{width:180px;height:240px;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.1))}
+
+/* Dog Container & Animations */
+.dog-container{margin:25px 0;position:relative;height:280px;display:flex;align-items:center;justify-content:center;transition:opacity .4s ease}
+.dog-container.hidden{display:none}
+.dog-animated{width:180px;height:240px;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.1))}
+
+/* Cat component animations */
+.cat-body{will-change:transform;animation:catBreath 2.5s ease-in-out infinite}
+.cat-head{will-change:transform}
+.cat-ears{animation:earTwitch 3s ease-in-out infinite}
+.cat-eyes{animation:eyeBlink 4s ease-in-out infinite}
+.cat-mouth{will-change:transform}
+.cat-tail{animation:tailWag 2s ease-in-out infinite;will-change:transform}
+.cat-paws{animation:pawShift 3.5s ease-in-out infinite}
+
+/* Cat mouth opening animation */
+.mouth-open{animation:mouthOpen 1.2s ease-in-out infinite}
+
+/* Dog component animations */
+.dog-body{will-change:transform;animation:dogBounce 2.2s ease-in-out infinite}
+.dog-head{will-change:transform}
+.dog-ears{animation:dogEarFlop 2.8s ease-in-out infinite}
+.dog-eyes{animation:eyeBlink 4s ease-in-out infinite}
+.dog-mouth{will-change:transform}
+.dog-tail{animation:dogTailWag 1.8s ease-in-out infinite;will-change:transform}
+.dog-legs{animation:dogPrance 2.2s ease-in-out infinite}
+.dog-tongue{animation:dogTongueShow 2.5s ease-in-out infinite}
+
+@keyframes dogBounce{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
+
+@keyframes dogEarFlop{
+  0%{transform:rotate(0deg)}
+  25%{transform:rotate(-12deg)}
+  50%{transform:rotate(0deg)}
+  75%{transform:rotate(12deg)}
+  100%{transform:rotate(0deg)}
+}
+
+@keyframes dogTailWag{
+  0%{transform:rotate(0deg) translateX(0)}
+  25%{transform:rotate(-20deg) translateX(8px)}
+  50%{transform:rotate(0deg) translateX(0)}
+  75%{transform:rotate(20deg) translateX(-8px)}
+  100%{transform:rotate(0deg) translateX(0)}
+}
+
+@keyframes dogPrance{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
+}
+
+@keyframes dogTongueShow{
+  0%{r:0;opacity:0}
+  40%{r:0;opacity:0}
+  50%{r:5;opacity:1}
+  60%{r:5;opacity:1}
+  70%{r:0;opacity:0}
+  100%{r:0;opacity:0}
+}
+
+@keyframes catBreath{
+  0%{transform:scaleY(1)}
+  50%{transform:scaleY(1.05)}
+  100%{transform:scaleY(1)}
+}
+
+@keyframes earTwitch{
+  0%{transform:rotate(0deg)}
+  25%{transform:rotate(-3deg)}
+  50%{transform:rotate(0deg)}
+  75%{transform:rotate(3deg)}
+  100%{transform:rotate(0deg)}
+}
+
+@keyframes eyeBlink{
+  0%{transform:scaleY(1)}
+  2%{transform:scaleY(0.1)}
+  4%{transform:scaleY(1)}
+  100%{transform:scaleY(1)}
+}
+
+@keyframes mouthOpen{
+  0%{ry:0;opacity:0}
+  40%{ry:0;opacity:0}
+  50%{ry:8;opacity:1}
+  60%{ry:8;opacity:1}
+  70%{ry:0;opacity:0}
+  100%{ry:0;opacity:0}
+}
+
+@keyframes tailWag{
+  0%{transform:rotate(0deg) translateX(0)}
+  25%{transform:rotate(-15deg) translateX(5px)}
+  50%{transform:rotate(0deg) translateX(0)}
+  75%{transform:rotate(15deg) translateX(-5px)}
+  100%{transform:rotate(0deg) translateX(0)}
+}
+
+@keyframes pawShift{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(8px)}
+  100%{transform:translateY(0)}
+}
+
+/* Priyanka Name Animations */
+.priyanka-container{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:200;pointer-events:none}
+.priyanka-container.hidden{display:none}
+
+.priyanka-name{
+  font-size:72px;
+  font-weight:700;
+  font-family:'Dancing Script','Poppins';
+  text-align:center;
+  letter-spacing:4px;
+  animation:priyankaBurst 3s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  background:linear-gradient(90deg,#ff1493,#ff69b4,#ffc0cb,#ff1493);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 30px rgba(255,20,147,0.3);
+  filter:drop-shadow(0 0 10px rgba(255,20,147,0.4))
+}
+
+@keyframes priyankaBurst{
+  0%{transform:scale(0) rotate(-180deg);opacity:0;filter:blur(20px)}
+  50%{transform:scale(1.2) rotate(0deg);opacity:1}
+  100%{transform:scale(1) rotate(0deg);opacity:0;filter:blur(5px);transform:translateY(-100px)}
+}
+
+/* Rose Variations (for different types) */
+.rose-red{color:#ff0000}
+.rose-pink{color:#ff69b4}
+.rose-white{color:#ffffff;text-shadow:0 0 8px rgba(255,255,255,0.8)}
+.rose-rainbow{animation:rainbowShift 1s linear infinite}
+
+@keyframes rainbowShift{
+  0%{color:#ff0000}
+  16%{color:#ff7f00}
+  33%{color:#ffff00}
+  50%{color:#00ff00}
+  66%{color:#0000ff}
+  83%{color:#4b0082}
+  100%{color:#ff0000}
+}
+
+/* Flower type configurations */
+.flower-rose { --flower-emoji: '🌹'; }
+.flower-tulip { --flower-emoji: '🌷'; }
+.flower-sunflower { --flower-emoji: '🌻'; }
+.flower-mixed { --flower-emoji: '💐'; }
+
+/* Responsive */
+@media (max-width:600px){
+  .card{padding:22px;border-radius:16px}
+  .message{font-size:26px}
+  .sorry-btn{padding:14px 26px;font-size:16px}
+  .lottie{width:240px;height:160px}
+  .robot.animated{width:100px;height:140px}
+  .gift-btn{font-size:48px}
+  .animated-rose{font-size:36px}
+  .cat-animated{width:130px;height:170px}
+  .dog-animated{width:130px;height:170px}
+  .priyanka-name{font-size:48px;letter-spacing:2px}
+  .theme-selector{top:10px;left:10px;padding:8px 12px;font-size:11px}
+}
